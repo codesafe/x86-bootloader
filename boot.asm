@@ -3,7 +3,7 @@
 
 ; boot loader BIOS magic number
 org 0x7c00
-bits 16
+;bits 16
 
 start:
     mov si, stringtest
@@ -17,8 +17,9 @@ loop:
     call printf
     inc si
     jmp loop
-done
-    jmp $
+	
+done:
+    jmp $	; jump to current address = infinite loop
 
 printf:
     mov ah, 0x0e
@@ -27,7 +28,7 @@ printf:
 
 
 stringtest: 
-    db '#### Welcome to My Bootloader !! -_- ####', 0
+    db '---------- Welcome to C5-Os !! ----------', 0
 
 times 510-($-$$) db 0     ; fill the rest of the sector ( 처음 510 바이트 ) with 0
 dw 0xAA55                   ; boot signature
